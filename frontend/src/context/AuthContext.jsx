@@ -3,14 +3,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext();
-const BACKEND_URL = "https://alg0-root-task-1.onrender.com/auth";
+const BACKEND_URL = "https://alg0-root-task-1.onrender.com";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
   const register = async (name, email, password) => {
     try {
-      const res = await axios.post(`${BACKEND_URL}/register`, { name, email, password });
+      const res = await axios.post(`${BACKEND_URL}/api/auth/register`, { name, email, password });
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setUser(res.data.user);
     } catch (error) {
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post(`${BACKEND_URL}/login`, { email, password });
+      const res = await axios.post(`${BACKEND_URL}/api/auth/login`, { email, password });
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setUser(res.data.user);
     } catch (error) {
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
   
-      const res = await axios.delete(`${BACKEND_URL}/delete`, {
+      const res = await axios.delete(`${BACKEND_URL}/api/auth/delete`, {
         data: { userId }, 
       });
   
