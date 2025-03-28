@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext();
-const BACKEND_URL = "http://localhost:5000/api/auth";
+const BACKEND_URL = "https://alg0-root-task-1.onrender.com/auth";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
